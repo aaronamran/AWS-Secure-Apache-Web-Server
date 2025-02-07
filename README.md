@@ -8,7 +8,7 @@ This is a writeup of a practical project that involves the following main concep
 
 
 
-### AWS Account Setup and Launching an Ubuntu EC2 Instance
+## AWS Account Setup and Launching an Ubuntu EC2 Instance
 - In AWS, create a free tier account and complete the identity verification and billing information
 - To launch an Ubuntu EC2 Instance, login to the AWS Management Console
 - Go to the EC2 Dashboard and click Launch Instance
@@ -33,7 +33,7 @@ This is a writeup of a practical project that involves the following main concep
 
 
 
-### Installing and Configuring Apache
+## Installing and Configuring Apache
 - Update the system:
   ```
   sudo apt update && sudo apt upgrade -y
@@ -111,13 +111,13 @@ This is a writeup of a practical project that involves the following main concep
 
 
 
-### DNS Configuration with Cloudflare (or a Free DNS Provider)
+## DNS Configuration with Cloudflare (or a Free DNS Provider)
 - 
 
 
 
 
-### SSL Setup with Certbot and Let’s Encrypt
+## SSL Setup with Certbot and Let’s Encrypt
 - Install Certbot and the Apache Plugin:
   ```
   sudo apt install certbot python3-certbot-apache -y
