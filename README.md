@@ -1,10 +1,10 @@
 # Secure Apache Web Server on AWS Free Tier
 This is a writeup of a practical project that involves the following main concepts:
-1. [AWS Account Setup and Launching an Ubuntu EC2 Instance]()
-2. [Installing and Configuring Apache]()
-3. [DNS Configuration with Cloudflare (or a Free DNS Provider)]()
-4. [SSL Setup with Certbot and Let’s Encrypt]()
-5. [Additional Security Best Practices]()
+1. [AWS Account Setup and Launching an Ubuntu EC2 Instance](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#aws-account-setup-and-launching-an-ubuntu-ec2-instance)
+2. [Installing and Configuring Apache](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#installing-and-configuring-apache)
+3. [DNS Configuration with Cloudflare (or a Free DNS Provider)](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#dns-configuration-with-cloudflare-or-a-free-dns-provider)
+4. [SSL Setup with Certbot and Let’s Encrypt](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#ssl-setup-with-certbot-and-lets-encrypt)
+5. [Additional Security Best Practices](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#additional-security-best-practices)
 
 
 
@@ -151,7 +151,7 @@ This is a writeup of a practical project that involves the following main concep
 - Visit `https://yourdomain.com/` in the browser to confirm the SSL certificate is active and that the site redirects from HTTP to HTTPS
 
 
-### Additional Security Best Practices
+## Additional Security Best Practices
 - Keep the system updated:
   ```
   sudo apt update && sudo apt upgrade -y
