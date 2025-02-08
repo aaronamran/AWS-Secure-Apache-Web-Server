@@ -1,5 +1,5 @@
 # Secure Apache Web Server on AWS Free Tier
-This is a writeup of a practical project that involves the following main concepts:
+This is a writeup of a practical project that involves the following main concepts in order:
 1. [AWS Account Setup and Launching an Ubuntu EC2 Instance](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#aws-account-setup-and-launching-an-ubuntu-ec2-instance)
 2. [Installing and Configuring Apache](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#installing-and-configuring-apache)
 3. [DNS Configuration with Cloudflare (or a Free DNS Provider)](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#dns-configuration-with-cloudflare-or-a-free-dns-provider)
