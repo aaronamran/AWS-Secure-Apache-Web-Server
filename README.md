@@ -10,16 +10,30 @@ This is a writeup of a practical project that involves the following main concep
 
 ## AWS Account Setup and Launching an Ubuntu EC2 Instance
 - In AWS, create a free tier account and complete the identity verification and billing information
-- To launch an Ubuntu EC2 Instance, login to the AWS Management Console
-- Go to the EC2 Dashboard and click Launch Instance
-- Choose an Amazon Machine Image (AMI) and select Ubuntu LTS image (Ubuntu Server 20.04 LTS)
-- Choose an Instance Type. Pick the t2.micro as it is eligible under Free Tier
-- Configure the instance details. For storage, usually the default settings are sufficient
+- To launch an Ubuntu EC2 Instance, login to the AWS Management Console <br>
+  ![image](https://github.com/user-attachments/assets/c7047eb5-d785-4784-a2b6-4b8a788d1219)
+
+- Go to the EC2 Dashboard and click Launch Instance <br>
+  ![image](https://github.com/user-attachments/assets/d77593d3-3dba-467e-b7dc-c3518e3dd774)
+
+- Choose an Amazon Machine Image (AMI) and select Ubuntu LTS image (Ubuntu Server 20.04 LTS) <br>
+  ![image](https://github.com/user-attachments/assets/2d286e83-4656-411e-aeef-e48a5bf43f7c)
+
+- Choose an Instance Type. Pick the t2.micro as it is eligible under Free Tier <br>
+  ![image](https://github.com/user-attachments/assets/3a568b77-4db3-45c9-8f70-a5d8bdffd890)
+
+  
+- Create a Key Pair for login usage by clicking `Create new key pair`. Choose a name such as `my-ec2-key`. Keep it secure as it will be used for SSH <br>
+  ![image](https://github.com/user-attachments/assets/082e34dc-c725-484b-b70d-e64ebf896961) <br>
+  ![image](https://github.com/user-attachments/assets/9b1eb762-b88f-4412-b7cd-888994ac0f93)
+
+- Configure the instance details. For storage, usually the default settings are sufficient <br>
+  
 - Configure the Security Group. Create or select a security group that allows
   - SSH (port 22) – for remote management
   - HTTP (port 80) – for web traffic
   - HTTPS (port 443) – for secure traffic
-- When prompted, select or create a key pair (download it and keep it secure. It will be used for SSH)
+
 - To connect to the newly created instance, open a terminal on the local machine
 - Set permissions for your key (if needed):
   ```
