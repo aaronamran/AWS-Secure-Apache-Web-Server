@@ -1,4 +1,4 @@
-# Secure-Apache-Web-Server-on-AWS
+# Secure Apache Web Server on AWS Free Tier
 This is a writeup of a practical project that involves the following main concepts:
 1. [AWS Account Setup and Launching an Ubuntu EC2 Instance]()
 2. [Installing and Configuring Apache]()
