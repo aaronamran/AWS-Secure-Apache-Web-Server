@@ -30,7 +30,7 @@ This is a writeup of a practical project that involves the following main concep
 - Configure the Security Group in Network settings. Create or select a security group that allows
   - SSH (port 22) – for remote management
   - HTTP (port 80) – for web traffic
-  - HTTPS (port 443) – for secure traffic
+  - HTTPS (port 443) – for secure traffic <br>
 ![image](https://github.com/user-attachments/assets/90e90a2f-6cef-4cdc-a5e6-889eb0a1bbb0)
 
 - For storage configuration, usually the default settings are sufficient <br>
