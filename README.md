@@ -27,34 +27,62 @@ This is a writeup of a practical project that involves the following main concep
   ![image](https://github.com/user-attachments/assets/082e34dc-c725-484b-b70d-e64ebf896961) <br>
   ![image](https://github.com/user-attachments/assets/9b1eb762-b88f-4412-b7cd-888994ac0f93)
 
-- Configure the instance details. For storage, usually the default settings are sufficient <br>
-  
-- Configure the Security Group. Create or select a security group that allows
+- Configure the Security Group in Network settings. Create or select a security group that allows
   - SSH (port 22) – for remote management
   - HTTP (port 80) – for web traffic
   - HTTPS (port 443) – for secure traffic
+![image](https://github.com/user-attachments/assets/90e90a2f-6cef-4cdc-a5e6-889eb0a1bbb0)
 
-- To connect to the newly created instance, open a terminal on the local machine
+- For storage configuration, usually the default settings are sufficient <br>
+  ![image](https://github.com/user-attachments/assets/1f129163-de0e-40f4-92db-90f24b9c2b84)
+    
+- To connect to the newly created instance, open a terminal on the local machine. In this case, we will be using WSL (Ubuntu 20.04.6 LTS) on Windows 11
+- In WSL, the C drive in Windows can be found in `/mnt`. To check, enter the following
+  ```
+  ls -l /mnt
+  ``` 
+  ![image](https://github.com/user-attachments/assets/f13d23fa-ec7b-4608-a272-6f9512643f9b)
+
+- Since the key (`my-ec2-key.pem`) is in the Downloads folder in Windows, we need to navigate to the Windows Downloads folder to find the key.
+  ```
+  cd /mnt/c/Users/<Windows_username>/Downloads
+  ```
+  ![image](https://github.com/user-attachments/assets/1972c1ad-5d67-4723-9bed-5a5a7334f31f)
+
+- Now that the key has been located, copy it to the WSL home directory:
+  ```
+  cp my-ec2-key.pem ~/my-ec2-key.pem
+  ```
+  Then return to WSL home directory and confirm the key is there <br>
+  ![image](https://github.com/user-attachments/assets/8bf1635a-4fae-4936-9325-c460050957f2)
+
 - Set permissions for your key (if needed):
   ```
-  chmod 400 /path/to/your-key.pem
+  chmod 400 ~/my-ec2-key.pem
   ```
 - Connect via SSH:
   ```
-  ssh -i /path/to/your-key.pem ubuntu@<EC2_PUBLIC_IP_ADDRESS>
+  ssh -i "my-ec2-key.pem" ec2-user@ec2-13-229-127-129.ap-southeast-1.compute.amazonaws.com
   ```
-- The local machine should now be connected to the Ubuntu instance
-
+- The local machine should now be connected to the Ubuntu instance <br>
+  ![image](https://github.com/user-attachments/assets/9b232694-28df-4de8-8f56-4122b47774ea)
 
 
 ## Installing and Configuring Apache
+- Before updating the system, identify which Linux Distribution is in use. Run the command
+  ```
+  cat /etc/os-release
+  ```
+  ![image](https://github.com/user-attachments/assets/8134b92d-0bfb-43af-b0c8-0f7dacfecc77)
+  Since Amazon Linux is in use, use `yum` instead of `apt` which is commonly used on Ubuntu or Debian distributions
+  
 - Update the system:
   ```
-  sudo apt update && sudo apt upgrade -y
+  sudo yum update && sudo yum upgrade -y
   ```
 - Install Apache:
   ```
-  sudo apt install apache2 -y
+  sudo yum install apache2 -y
   ```
 - Verify Apache is running, or simply visit `http://<EC2_PUBLIC_IP_ADDRESS>/` in your browser to see the default Apache page):
   ```
