@@ -73,27 +73,44 @@ This is a writeup of a practical project that involves the following main concep
   ```
   cat /etc/os-release
   ```
-  ![image](https://github.com/user-attachments/assets/8134b92d-0bfb-43af-b0c8-0f7dacfecc77)
+  ![image](https://github.com/user-attachments/assets/8134b92d-0bfb-43af-b0c8-0f7dacfecc77) <br>
   Since Amazon Linux is in use, use `yum` instead of `apt` which is commonly used on Ubuntu or Debian distributions
   
 - Update the system:
   ```
   sudo yum update && sudo yum upgrade -y
   ```
+  ![image](https://github.com/user-attachments/assets/79e99c39-5f41-4e6d-9997-cead919cb207)
+
 - Install Apache:
   ```
-  sudo yum install apache2 -y
+  sudo yum install httpd -y
   ```
-- Verify Apache is running, or simply visit `http://<EC2_PUBLIC_IP_ADDRESS>/` in your browser to see the default Apache page):
+  ![image](https://github.com/user-attachments/assets/8c429d74-f728-4d27-8a2a-5cbe13e9ac78)
+
+- Verify Apache is running using each of the commands below, or simply visit `http://<EC2_PUBLIC_IP_ADDRESS>/` in your browser to see the default Apache page):
   ```
-  sudo systemctl status apache2
+  sudo systemctl status httpd
+  sudo systemctl enable httpd
+  sudo systemctl start httpd
+  sudo systemctl status httpd
   ```
-- Adjust UFW Firewall Settings to allow Apache through UFW:
+  ![image](https://github.com/user-attachments/assets/76e07dae-5855-4e80-9fb3-ea6b3c6e8754)
+  <br>
+  ![image](https://github.com/user-attachments/assets/a6423e80-19d6-46be-8bc4-1f8061376743)
+  <br>
+  ![image](https://github.com/user-attachments/assets/8e518aa6-91e3-4f37-ab06-3e77e5d5e810)
+
+
+
+- Note that in Amazon Linux, UFW firewall does not exist. It does not matter since Firewall rules were already configured earlier in Network settings' Security Group
   ```
   sudo ufw allow 'Apache Full'
-  sudo ufw enable
-  sudo ufw status
   ```
+  ![image](https://github.com/user-attachments/assets/d8073dea-047e-4f74-a18d-f2bcc4dda284)
+  
+  
+
 - To configure Virtual Hosts for the website, create a directory for the website:
   ```
   sudo mkdir -p /var/www/yourdomain.com/public_html
