@@ -173,12 +173,14 @@ References: [Tutorial: Install a LAMP server on AL2](https://docs.aws.amazon.com
   sudo certbot renew --dry-run
   ```
 - Visit `https://todolist.zapto.org/` in the browser to confirm the SSL certificate is active and that the site redirects from HTTP to HTTPS
+  ![image](https://github.com/user-attachments/assets/a0979092-f534-4eae-9b82-67e24d28f0b3)
+
 
 
 ## Additional Security Best Practices
 - Keep the system updated:
   ```
-  sudo apt update && sudo apt upgrade -y
+  sudo yum update && sudo yum upgrade -y
   ```
 - Regularly check `/var/log/apache2/` for any unusual activity
 - To harden Apache, disable directory listings by ensuring Options -Indexes is set in your Apache configuration. Consider installing security modules like mod_security for added protection
