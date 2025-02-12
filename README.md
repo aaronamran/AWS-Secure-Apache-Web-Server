@@ -5,6 +5,8 @@ This is a writeup of a practical project that involves the following main concep
 3. [DNS Configuration with Cloudflare (or a Free DNS Provider)](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#dns-configuration-with-cloudflare-or-a-free-dns-provider)
 4. [SSL Setup with Certbot and Let’s Encrypt](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#ssl-setup-with-certbot-and-lets-encrypt)
 5. [Additional Security Best Practices](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#additional-security-best-practices)
+<br>
+References: [Tutorial: Install a LAMP server on AL2](https://docs.aws.amazon.com/linux/al2/ug/ec2-lamp-amazon-linux-2.html)
 
 
 
@@ -109,81 +111,58 @@ This is a writeup of a practical project that involves the following main concep
   ```
   ![image](https://github.com/user-attachments/assets/d8073dea-047e-4f74-a18d-f2bcc4dda284)
   
+
+- Now let's prepare the website in the EC2 instance. First, navigate to the `/var/www/html` folder
+  ```
+  cd /var/www/html
+  ```
+- Check if git is installed in the EC2 instance. If it is not installed, run the following command:
+  ```
+  sudo yum install git -y
+  ```
+  Then confirm it is installed by running
+  ```
+  git --version
+  ```
+- Now let's clone a [sample PHP web app repository](https://github.com/aaronamran/sample-php-crud) into the current directory
+  ```
+  sudo git clone https://github.com/aaronamran/sample-php-crud.git .
+  ```
+  ![image](https://github.com/user-attachments/assets/d180bd17-f78c-4324-966b-9fdd9ced3d71)
+
+- Install MariaDB server for the website. Run the following command and look for `mariadb105-server`
+  ```
+  sudo yum search mariadb
+  sudo yum install mariadb105-server
+  ```
+  ![image](https://github.com/user-attachments/assets/d97ba470-9ae5-42d0-a9cd-9cc9288770a2)
   
-
-- To configure Virtual Hosts for the website, create a directory for the website:
+- Run each of the following commands after the installation is complete:
   ```
-  sudo mkdir -p /var/www/yourdomain.com/public_html
-  sudo chown -R $USER:$USER /var/www/yourdomain.com/public_html
-  sudo chmod -R 755 /var/www
+  sudo systemctl start mariadb
+  sudo systemctl enable mariadb
+  sudo systemctl status mariadb
   ```
-- Create a sample `index.html` page:
-  ```
-  nano /var/www/yourdomain.com/public_html/index.html
-  ```
-  and paste the following HTML, then save and exit:
-  ```
-  <!DOCTYPE html>
-  <html>
-  <head>
-      <title>Welcome to YourDomain!</title>
-  </head>
-  <body>
-      <h1>Success! Your Apache virtual host is working!</h1>
-  </body>
-  </html>
-  ```
-- Create a new Virtual Host configuration file:
-  ```
-  sudo nano /etc/apache2/sites-available/yourdomain.com.conf
-  ```
-  Paste the following configuration:
-  ```
-  <VirtualHost *:80>
-    ServerAdmin admin@yourdomain.com
-    ServerName yourdomain.com
-    ServerAlias www.yourdomain.com
-    DocumentRoot /var/www/yourdomain.com/public_html
-    
-    ErrorLog ${APACHE_LOG_DIR}/yourdomain_error.log
-    CustomLog ${APACHE_LOG_DIR}/yourdomain_access.log combined
-  </VirtualHost>
-  ```
-- Enable the new Virtual Host:
-  ```
-  sudo a2ensite yourdomain.com.conf
-  ```
-- Disable the Default Site (optional but recommended to avoid conflicts):
-  ```
-  sudo a2dissite 000-default.conf
-  ```
-- Test the Apache configuration and reload:
-  ```
-  sudo apache2ctl configtest
-  sudo systemctl reload apache2
-  ```
-- Apache logs are typically stored in `/var/log/apache2/`
-- You can adjust logging levels and rotation policies via the main Apache configuration files and logrotate (`/etc/logrotate.d/apache2`)
-- For performance, consider tuning settings like `KeepAlive`, `MaxKeepAliveRequests`, etc., in `/etc/apache2/apache2.conf` if necessary
-
-
-
+  ![image](https://github.com/user-attachments/assets/b4df02f1-3c80-4895-a1e2-b70666af9d5b)
 
 
 ## DNS Configuration with Cloudflare (or a Free DNS Provider)
-- 
-
+- For the sake of simplicity and free resource, No-IP will be used for a free hostname instead of Cloudflare. After signing up for a free account in No-IP, create a suitable hostname such as `todolist.zapto.org`. The public IP address of the hostname is the public IP address of the EC2 instance <br>
+  ![image](https://github.com/user-attachments/assets/143dce9a-8cf6-4754-9554-0369b7a3d523)
 
 
 
 ## SSL Setup with Certbot and Let’s Encrypt
 - Install Certbot and the Apache Plugin:
   ```
-  sudo apt install certbot python3-certbot-apache -y
+  sudo yum install certbot python3-certbot-apache -y
   ```
+  ![image](https://github.com/user-attachments/assets/49ba9947-fc35-405d-b6fa-a4abe73c4fb3)
+
+
 - Run Certbot for Apache:
   ```
-  sudo certbot --apache -d yourdomain.com -d www.yourdomain.com
+  sudo certbot --apache -d todolist.zapto.org
   ```
   Follow the interactive prompts:
   - Provide your email address
@@ -193,7 +172,7 @@ This is a writeup of a practical project that involves the following main concep
   ```
   sudo certbot renew --dry-run
   ```
-- Visit `https://yourdomain.com/` in the browser to confirm the SSL certificate is active and that the site redirects from HTTP to HTTPS
+- Visit `https://todolist.zapto.org/` in the browser to confirm the SSL certificate is active and that the site redirects from HTTP to HTTPS
 
 
 ## Additional Security Best Practices
