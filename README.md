@@ -150,6 +150,46 @@ References: [Tutorial: Install a LAMP server on AL2](https://docs.aws.amazon.com
 - For the sake of simplicity and free resource, No-IP will be used for a free hostname instead of Cloudflare. After signing up for a free account in No-IP, create a suitable hostname such as `todolist.zapto.org`. The public IP address of the hostname is the public IP address of the EC2 instance <br>
   ![image](https://github.com/user-attachments/assets/143dce9a-8cf6-4754-9554-0369b7a3d523)
 
+- To verify if Apache (httpd) is listening on port 80 on the EC2 instance, run
+  ```
+  sudo netstat -tulnp | grep :80
+  ```
+  ![image](https://github.com/user-attachments/assets/9b47344c-f6e0-40cc-bb8e-502b1f76afaf)
+
+- Check the VirtualHost configuration
+  ```
+  sudo httpd -S
+  ```
+  ![image](https://github.com/user-attachments/assets/a40a4fca-951b-493b-9b68-8ad52c62e22b) <br>
+  In the screenshot above, Apache is not configured to serve a VirtualHost on port 80, which is required for Let's Encrypt to verify the domain ownership. To fix this, create a VirtualHost configuration for HTTP (Port 80)
+  ```
+  sudo nano /etc/httpd/conf.d/todolist.conf
+  ```
+  Add the following configuration:
+  ```
+  <VirtualHost *:80>
+    ServerName todolist.zapto.org
+    DocumentRoot /var/www/html
+    
+    <Directory "/var/www/html">
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/httpd/todolist-error.log
+    CustomLog /var/log/httpd/todolist-access.log combined
+  </VirtualHost>
+  ```
+  Then restart Apache to apply changes
+  ```
+  sudo systemctl restart httpd
+  ```
+- Reverify that the VirtualHost is added
+  ```
+  sudo httpd -S
+  ```
+  ![image](https://github.com/user-attachments/assets/f933e279-3497-4a4d-bdbd-10d40efbfafb)
+
 
 
 ## SSL Setup with Certbot and Let’s Encrypt
@@ -168,6 +208,12 @@ References: [Tutorial: Install a LAMP server on AL2](https://docs.aws.amazon.com
   - Provide your email address
   - Agree to the Terms of Service
   - Certbot will ask if you want to redirect HTTP to HTTPS—choose Yes to enforce HTTPS
+- The command could be ran as the following
+  ```
+  sudo certbot --apache
+  ```
+  ![image](https://github.com/user-attachments/assets/2ab0daae-727e-465b-b96b-b8d27eb8c765)
+
 - Certbot sets up automatic renewal. You can test the renewal process with:
   ```
   sudo certbot renew --dry-run
