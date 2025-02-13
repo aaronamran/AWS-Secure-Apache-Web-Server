@@ -184,7 +184,7 @@ References: [Tutorial: Install a LAMP server on AL2](https://docs.aws.amazon.com
   ```
   sudo systemctl restart httpd
   ```
-- Reverify that the VirtualHost is added
+- Verify again that the VirtualHost is added
   ```
   sudo httpd -S
   ```
