@@ -6,7 +6,7 @@ This is a writeup of a practical project that involves the following main concep
 4. [SSL Setup with Certbot and Let’s Encrypt](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#ssl-setup-with-certbot-and-lets-encrypt)
 5. [Additional Security Best Practices](https://github.com/aaronamran/Secure-Apache-Web-Server-on-AWS/blob/main/README.md#additional-security-best-practices)
 <br>
-References: [Tutorial: Install a LAMP server on AL2](https://docs.aws.amazon.com/linux/al2/ug/ec2-lamp-amazon-linux-2.html)
+- References: [Tutorial: Install a LAMP server on AL2](https://docs.aws.amazon.com/linux/al2/ug/ec2-lamp-amazon-linux-2.html)
 
 
 
